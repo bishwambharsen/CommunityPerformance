@@ -1,0 +1,40 @@
+<aura:component controller="AccountsController" implements="forceCommunity:availableForAllPageTypes">
+    <aura:attribute name="accounts" type="Account[]" />
+    <aura:attribute name="contacts" type="Contact[]" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <lightning:layout>
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto">
+            <lightning:card title="Accounts" iconName="standard:account">
+                <aura:if isTrue="{!not(empty(v.accounts))}">
+                    <lightning:layout horizontalAlign="center" verticalAlign="start" multipleRows="true" pullToBoundary="small">
+                        <aura:iteration items="{!v.accounts}" var="account">
+                            <lightning:layoutItem padding="around-small" size="3" flexibility="auto">
+                                {!account.Name}
+                            </lightning:layoutItem>
+                        </aura:iteration>
+                    </lightning:layout>
+                    <aura:set attribute="else">
+                        <lightning:formattedText value="No accounts were found" />
+                    </aura:set>
+                </aura:if>
+            </lightning:card>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small" flexibility="auto">
+            <lightning:card title="Contacts" iconName="standard:contact">
+                <aura:if isTrue="{!not(empty(v.contacts))}">
+                    <lightning:layout horizontalAlign="center" verticalAlign="start" multipleRows="true" pullToBoundary="small">
+                        <aura:iteration items="{!v.contacts}" var="contact">
+                            <lightning:layoutItem padding="around-small" size="3" flexibility="auto">
+                                {!contact.LastName}
+                            </lightning:layoutItem>
+                        </aura:iteration>
+                    </lightning:layout>
+                    <aura:set attribute="else">
+                        <lightning:formattedText value="No contacts were found" />
+                    </aura:set>
+                </aura:if>
+            </lightning:card>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>
